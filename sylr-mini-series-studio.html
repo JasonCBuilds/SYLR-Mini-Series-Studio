@@ -1,0 +1,976 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>S.Y.L.R. Mini-Series Studio</title>
+    <style>
+:root {
+  --black: #050505;
+  --ink: #0a0a0a;
+  --panel: #111111;
+  --panel-2: #171717;
+  --line: #343434;
+  --line-soft: #242424;
+  --white: #f8f8f4;
+  --muted: #a8a8a0;
+  --dim: #73736c;
+  --gold: #d8a84d;
+  --gold-2: #f0cb73;
+  --success: #d7f2b4;
+  --radius: 6px;
+  --shadow: 0 18px 70px rgba(0, 0, 0, 0.45);
+  font-family:
+    "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 55% 5%, rgba(255, 255, 255, 0.045), transparent 26rem),
+    linear-gradient(135deg, #050505 0%, #0d0d0c 46%, #030303 100%);
+  color: var(--white);
+  letter-spacing: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  border-right: 1px solid var(--line);
+  background: rgba(3, 3, 3, 0.92);
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-block {
+  padding: 32px 28px 26px;
+  border-bottom: 1px solid var(--line);
+}
+
+.crown {
+  color: var(--gold-2);
+  font-size: 24px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.brand-mark {
+  font-size: clamp(42px, 4vw, 58px);
+  line-height: 0.9;
+  font-weight: 950;
+  letter-spacing: -1px;
+  white-space: nowrap;
+}
+
+.studio-name {
+  display: inline-block;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 2px solid var(--white);
+  text-transform: uppercase;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.brand-line,
+.topbar p,
+.field-row span,
+label span,
+.column-count,
+.episode-meta,
+.founder-card span {
+  color: var(--muted);
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 1.3;
+  letter-spacing: 1.2px;
+}
+
+.brand-line {
+  margin-top: 12px;
+  color: var(--white);
+}
+
+.nav-list {
+  display: grid;
+  gap: 2px;
+  padding: 18px 0;
+}
+
+.nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 0;
+  border-left: 4px solid transparent;
+  padding: 17px 28px;
+  background: transparent;
+  color: var(--white);
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.nav-item.active,
+.nav-item:hover {
+  border-left-color: var(--gold);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-icon {
+  width: 20px;
+  color: var(--white);
+  font-size: 20px;
+}
+
+.founder-card {
+  margin: auto 18px 18px;
+  border: 1px solid var(--line);
+  padding: 18px;
+  min-height: 118px;
+  display: grid;
+  align-content: end;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02)),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 13px);
+}
+
+.founder-card strong {
+  display: block;
+  margin-top: 8px;
+  max-width: 160px;
+  font-size: 13px;
+  text-transform: uppercase;
+  line-height: 1.45;
+}
+
+.studio {
+  min-width: 0;
+}
+
+.topbar {
+  min-height: 126px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 32px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(5, 5, 5, 0.72);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: clamp(36px, 5vw, 48px);
+  line-height: 0.95;
+  font-weight: 950;
+}
+
+.duplicate-btn,
+.primary-btn,
+.ghost-btn,
+.mini-action {
+  min-height: 48px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold-2);
+  padding: 0 20px;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.duplicate-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 455px);
+  min-height: calc(100vh - 126px);
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(170px, 1fr));
+  overflow-x: auto;
+  border-right: 1px solid var(--line);
+}
+
+.status-column {
+  min-width: 170px;
+  border-right: 1px solid var(--line-soft);
+  padding: 24px 16px 18px;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.column-title {
+  text-transform: uppercase;
+  font-size: 19px;
+  font-weight: 950;
+}
+
+.column-count {
+  color: var(--white);
+  border: 1px solid var(--line);
+  padding: 4px 8px;
+}
+
+.episode-list {
+  display: grid;
+  gap: 10px;
+}
+
+.episode-card {
+  width: 100%;
+  min-height: 132px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.018)),
+    var(--panel);
+  color: var(--white);
+  text-align: left;
+  padding: 16px 13px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.episode-card:hover,
+.episode-card.selected {
+  border-color: var(--gold);
+}
+
+.episode-card.selected {
+  box-shadow:
+    0 0 0 1px rgba(216, 168, 77, 0.34),
+    var(--shadow);
+}
+
+.episode-card strong {
+  display: block;
+  margin: 12px 0 14px;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.episode-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--white);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.add-episode {
+  margin-top: 16px;
+  width: 100%;
+  border: 0;
+  color: var(--muted);
+  background: transparent;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 1px;
+  padding: 14px 0;
+}
+
+.inspector {
+  background: rgba(4, 4, 4, 0.9);
+  padding: 28px;
+  overflow: auto;
+  max-height: calc(100vh - 126px);
+}
+
+.inspector-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.inspector-heading span {
+  color: var(--gold);
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.inspector-heading h2 {
+  margin-top: 6px;
+  font-size: 29px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.close-button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  background: transparent;
+  color: var(--white);
+  font-size: 30px;
+}
+
+.episode-form {
+  display: grid;
+  gap: 14px;
+  padding-top: 18px;
+}
+
+label {
+  display: grid;
+  gap: 7px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: #080808;
+  color: var(--white);
+  padding: 12px 13px;
+  outline: none;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--gold);
+}
+
+.field-row {
+  display: grid;
+  gap: 14px;
+}
+
+.field-row.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.form-actions {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 12px;
+  padding-top: 6px;
+}
+
+.primary-btn {
+  color: var(--black);
+  background: linear-gradient(180deg, var(--gold-2), var(--gold));
+}
+
+.ghost-btn {
+  border-color: var(--line);
+  color: var(--white);
+}
+
+.mobile-summary {
+  display: none;
+  border-bottom: 1px solid var(--line);
+  padding: 14px 16px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.mobile-summary span {
+  display: block;
+  color: var(--gold);
+  font-weight: 950;
+}
+
+.mobile-summary strong {
+  display: block;
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  border: 1px solid var(--gold);
+  background: #0a0a0a;
+  color: var(--white);
+  padding: 12px 16px;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  transition: 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 1180px) {
+  .app-shell {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .inspector {
+    max-height: none;
+    border-top: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 760px) {
+  .app-shell {
+    display: block;
+  }
+
+  .sidebar {
+    position: static;
+    height: auto;
+    border-right: 0;
+  }
+
+  .brand-block {
+    padding: 22px 18px 18px;
+  }
+
+  .brand-mark {
+    font-size: 46px;
+  }
+
+  .studio-name {
+    font-size: 17px;
+  }
+
+  .nav-list {
+    display: flex;
+    overflow-x: auto;
+    padding: 0 12px 14px;
+  }
+
+  .nav-item {
+    min-width: max-content;
+    border-left: 0;
+    border-bottom: 3px solid transparent;
+    padding: 12px 10px;
+    font-size: 12px;
+  }
+
+  .nav-item.active,
+  .nav-item:hover {
+    border-bottom-color: var(--gold);
+  }
+
+  .founder-card {
+    display: none;
+  }
+
+  .topbar {
+    min-height: auto;
+    display: grid;
+    padding: 20px 16px;
+  }
+
+  h1 {
+    font-size: 38px;
+  }
+
+  .duplicate-btn,
+  .mobile-summary,
+  .form-actions,
+  .field-row.two {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-summary {
+    display: flex;
+  }
+
+  .workspace {
+    min-height: 0;
+  }
+
+  .board {
+    grid-template-columns: 1fr;
+    overflow: visible;
+    border-right: 0;
+  }
+
+  .status-column {
+    min-width: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 18px 16px;
+  }
+
+  .episode-list {
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  }
+
+  .inspector {
+    padding: 22px 16px;
+  }
+
+  .inspector-heading h2 {
+    font-size: 24px;
+  }
+}
+
+</style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Studio navigation">
+        <div class="brand-block">
+          <div class="crown" aria-hidden="true">â™›</div>
+          <div class="brand-mark">S.Y.L.R.</div>
+          <div class="studio-name">Mini-Series Studio</div>
+          <div class="brand-line">Start Young Live Rich</div>
+        </div>
+        <nav class="nav-list">
+          <button class="nav-item active" type="button">
+            <span class="nav-icon" aria-hidden="true">â–¦</span>
+            Dashboard
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon" aria-hidden="true">â–¤</span>
+            Episodes
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon" aria-hidden="true">â–§</span>
+            Templates
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon" aria-hidden="true">â–£</span>
+            Calendar
+          </button>
+        </nav>
+        <div class="founder-card">
+          <span>S.Y.L.R.</span>
+          <strong>Build the proof. Live intentional. Leave legacy.</strong>
+        </div>
+      </aside>
+
+      <main class="studio">
+        <header class="topbar">
+          <div>
+            <h1>Dashboard</h1>
+            <p>Manage short-form founder episodes from idea to post.</p>
+          </div>
+          <button class="duplicate-btn" id="duplicateTemplate" type="button">
+            <span aria-hidden="true">â§‰</span>
+            Duplicate Template
+          </button>
+        </header>
+
+        <section class="mobile-summary" aria-label="Current selection">
+          <div>
+            <span id="mobileEpisode">EP. 06</span>
+            <strong id="mobileTitle">Progress Over Perfection</strong>
+          </div>
+          <button class="mini-action" id="mobileDuplicate" type="button">Duplicate</button>
+        </section>
+
+        <section class="workspace" aria-label="Episode dashboard">
+          <div class="board" id="board" aria-label="Episode status columns"></div>
+
+          <aside class="inspector" aria-label="Episode editor">
+            <div class="inspector-heading">
+              <div>
+                <span id="selectedEpisodeLabel">EP. 06</span>
+                <h2 id="selectedEpisodeTitle">Progress Over Perfection</h2>
+              </div>
+              <button class="close-button" type="button" aria-label="Close editor">Ã—</button>
+            </div>
+
+            <form id="episodeForm" class="episode-form">
+              <div class="field-row two">
+                <label>
+                  <span>Episode Number</span>
+                  <input name="episodeNumber" type="text" />
+                </label>
+                <label>
+                  <span>Status</span>
+                  <select name="status"></select>
+                </label>
+              </div>
+
+              <label>
+                <span>Title</span>
+                <input name="title" type="text" />
+              </label>
+
+              <label>
+                <span>Hook</span>
+                <input name="hook" type="text" />
+              </label>
+
+              <label>
+                <span>Script</span>
+                <textarea name="script" rows="5"></textarea>
+              </label>
+
+              <label>
+                <span>Voiceover</span>
+                <textarea name="voiceover" rows="2"></textarea>
+              </label>
+
+              <label>
+                <span>Shot List</span>
+                <textarea name="shotList" rows="5"></textarea>
+              </label>
+
+              <label>
+                <span>Caption</span>
+                <textarea name="caption" rows="3"></textarea>
+              </label>
+
+              <label>
+                <span>Hashtags</span>
+                <input name="hashtags" type="text" />
+              </label>
+
+              <div class="field-row two">
+                <label>
+                  <span>Product Tie-In</span>
+                  <input name="productTieIn" type="text" />
+                </label>
+                <label>
+                  <span>Platform</span>
+                  <select name="platform">
+                    <option>TikTok</option>
+                    <option>Instagram</option>
+                    <option>YouTube Shorts</option>
+                    <option>LinkedIn</option>
+                  </select>
+                </label>
+              </div>
+
+              <label>
+                <span>Scheduled Post Date</span>
+                <input name="scheduledPostDate" type="datetime-local" />
+              </label>
+
+              <div class="form-actions">
+                <button class="ghost-btn" type="button" id="saveDraft">Save Draft</button>
+                <button class="primary-btn" type="submit">Update Episode</button>
+              </div>
+            </form>
+          </aside>
+        </section>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script>
+const statuses = ["Idea", "Scripted", "Filming", "Editing", "Ready", "Posted"];
+
+const templateEpisode = {
+  title: "Founder Template: One Real Lesson",
+  episodeNumber: "T01",
+  hook: "Nobody sees this part, but this is where the brand gets built.",
+  script:
+    "Open on the after-hours work setup.\nName the problem in one sentence.\nShow the real action.\nTie it back to Start Young Live Rich.\nClose with one useful lesson.",
+  voiceover: "The dream gets built when nobody is clapping yet.",
+  shotList:
+    "1. Laptop open after work\n2. Notes, orders, or product in frame\n3. Founder walking into the next task\n4. Close-up of the brand detail\n5. End frame with S.Y.L.R.",
+  caption: "Building after hours still counts. Every focused rep compounds.",
+  hashtags: "#SYLR #StartYoungLiveRich #FounderJourney #BuildInSilence #FuelzUS",
+  productTieIn: "S.Y.L.R. founder story",
+  platform: "TikTok",
+  status: "Idea",
+  scheduledPostDate: "2026-07-06T10:00",
+};
+
+let episodes = [
+  {
+    title: "Progress Over Perfection",
+    episodeNumber: "06",
+    hook: "Discipline beats motivation when no one's watching.",
+    script:
+      "We all want overnight success.\nBut real success is built in the moments no one sees.\nIt's choosing progress over perfection.\nIt's showing up, even on the hard days.\nThat's how you build a brand. That's how you build freedom.",
+    voiceover: "Discipline beats motivation when no one's watching.",
+    shotList:
+      "1. Close up - laptop open, silent workspace\n2. Gym clip - early morning lift\n3. Brand notebook / FuelzUS product shot\n4. On the go - working on phone\n5. End frame - S.Y.L.R. logo",
+    caption: "Progress isn't always loud. But it's always leading somewhere. #SYLR",
+    hashtags: "#SYLR #StartYoungLiveRich #Discipline #FuelzUS #ProgressOverPerfection #FounderJourney",
+    productTieIn: "FuelzUS Hydration",
+    platform: "TikTok",
+    status: "Ready",
+    scheduledPostDate: "2026-07-02T10:00",
+  },
+  {
+    title: "The Why Keeps You Up",
+    episodeNumber: "03",
+    hook: "Full-time job by day. Brand builder by night.",
+    script:
+      "Clocking out doesn't mean the mission clocks out.\nFuelzUS started as a problem I wanted to solve.\nS.Y.L.R. is the reminder that the work has a bigger purpose.",
+    voiceover: "If your why is real, the late nights start to make sense.",
+    shotList:
+      "1. Leaving work\n2. Night desk setup\n3. FuelzUS route notes\n4. Packing sample product\n5. Founder reflection shot",
+    caption: "The schedule is full because the vision is bigger.",
+    hashtags: "#SYLR #FuelzUS #FounderLife #FullTimeFounder #StartYoungLiveRich",
+    productTieIn: "FuelzUS launch story",
+    platform: "Instagram",
+    status: "Posted",
+    scheduledPostDate: "2026-06-18T19:30",
+  },
+  {
+    title: "Building in Silence",
+    episodeNumber: "13",
+    hook: "Some chapters are meant to be quiet until they are solid.",
+    script:
+      "Everybody wants the announcement.\nFew people respect the reps before it.\nThis week is about documenting the build, not performing success.",
+    voiceover: "Build the thing before you ask the world to believe in it.",
+    shotList:
+      "1. Silent planning board\n2. Founder checking product notes\n3. Quick workout cutaway\n4. FuelzUS delivery prep\n5. S.Y.L.R. hoodie detail",
+    caption: "Build in silence. Let the results introduce the standard.",
+    hashtags: "#BuildInSilence #SYLR #StartYoungLiveRich #FounderJourney",
+    productTieIn: "S.Y.L.R. hoodie",
+    platform: "Instagram",
+    status: "Idea",
+    scheduledPostDate: "2026-07-12T09:00",
+  },
+  {
+    title: "The Plan No One Sees",
+    episodeNumber: "10",
+    hook: "A brand is not built from vibes. It is built from systems.",
+    script:
+      "Content, product, delivery, follow-up.\nEvery part needs a system.\nFuelzUS taught me that the back end matters as much as the front camera.",
+    voiceover: "The plan behind the brand is what makes the brand last.",
+    shotList:
+      "1. Weekly planning page\n2. Order tracker glance\n3. Recording setup\n4. Product tie-in close-up\n5. Founder walking out with purpose",
+    caption: "The unseen system is the visible advantage.",
+    hashtags: "#FounderSystems #SYLR #FuelzUS #BrandBuilding",
+    productTieIn: "FuelzUS order workflow",
+    platform: "TikTok",
+    status: "Scripted",
+    scheduledPostDate: "2026-07-08T12:00",
+  },
+  {
+    title: "Day in the Life: Build + 9-5",
+    episodeNumber: "09",
+    hook: "This is what building after the job really looks like.",
+    script:
+      "Early alarm. Work day. Short break. Brand tasks. FuelzUS follow-ups.\nNo glamour edit. Just the real rhythm of building something while life is still moving.",
+    voiceover: "You do not need more hours. You need more intention with the hours you have.",
+    shotList:
+      "1. Alarm clock\n2. Commute or work bag\n3. Lunch-break notes\n4. Evening brand work\n5. FuelzUS delivery prep",
+    caption: "Full-time schedule. Founder standard.",
+    hashtags: "#DayInTheLife #SYLR #FuelzUS #FullTimeFounder",
+    productTieIn: "FuelzUS daily use",
+    platform: "YouTube Shorts",
+    status: "Filming",
+    scheduledPostDate: "2026-07-05T18:00",
+  },
+  {
+    title: "Why I Started FuelzUS",
+    episodeNumber: "08",
+    hook: "I did not want another idea. I wanted a real solution.",
+    script:
+      "FuelzUS came from seeing a simple gap: people need better access to fuel and essentials when time is tight.\nThe mission is convenience with discipline behind it.",
+    voiceover: "The best brands start by solving something real.",
+    shotList:
+      "1. Founder talking to camera\n2. FuelzUS notes\n3. Product/service moment\n4. Local route shot\n5. S.Y.L.R. closing line",
+    caption: "Start with a real problem. Build the solution with standards.",
+    hashtags: "#FuelzUS #SYLR #StartupStory #FounderJourney",
+    productTieIn: "FuelzUS origin",
+    platform: "Instagram",
+    status: "Editing",
+    scheduledPostDate: "2026-07-04T11:30",
+  },
+];
+
+let selectedIndex = 0;
+
+const board = document.querySelector("#board");
+const form = document.querySelector("#episodeForm");
+const toast = document.querySelector("#toast");
+const statusSelect = form.elements.status;
+
+statuses.forEach((status) => {
+  const option = document.createElement("option");
+  option.value = status;
+  option.textContent = status;
+  statusSelect.append(option);
+});
+
+function formatEpisodeNumber(value) {
+  return `EP. ${value}`;
+}
+
+function formatDate(value) {
+  if (!value) return "Unscheduled";
+  return new Intl.DateTimeFormat("en", {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(new Date(value));
+}
+
+function renderBoard() {
+  board.innerHTML = "";
+
+  statuses.forEach((status) => {
+    const column = document.createElement("section");
+    column.className = "status-column";
+    column.setAttribute("aria-label", `${status} episodes`);
+
+    const statusEpisodes = episodes
+      .map((episode, index) => ({ episode, index }))
+      .filter(({ episode }) => episode.status === status);
+
+    column.innerHTML = `
+      <div class="column-header">
+        <h3 class="column-title">${status}</h3>
+        <span class="column-count">${statusEpisodes.length}</span>
+      </div>
+      <div class="episode-list"></div>
+      <button class="add-episode" type="button">+ Add Episode</button>
+    `;
+
+    const list = column.querySelector(".episode-list");
+    statusEpisodes.forEach(({ episode, index }) => {
+      const card = document.createElement("button");
+      card.className = `episode-card${index === selectedIndex ? " selected" : ""}`;
+      card.type = "button";
+      card.innerHTML = `
+        <span class="episode-meta">${formatEpisodeNumber(episode.episodeNumber)}</span>
+        <strong>${episode.title}</strong>
+        <span class="episode-meta">${episode.platform} Â· ${formatDate(episode.scheduledPostDate)}</span>
+      `;
+      card.addEventListener("click", () => {
+        selectedIndex = index;
+        syncSelection();
+      });
+      list.append(card);
+    });
+
+    column.querySelector(".add-episode").addEventListener("click", () => duplicateTemplate(status));
+    board.append(column);
+  });
+}
+
+function syncSelection() {
+  const episode = episodes[selectedIndex];
+  document.querySelector("#selectedEpisodeLabel").textContent = formatEpisodeNumber(episode.episodeNumber);
+  document.querySelector("#selectedEpisodeTitle").textContent = episode.title;
+  document.querySelector("#mobileEpisode").textContent = formatEpisodeNumber(episode.episodeNumber);
+  document.querySelector("#mobileTitle").textContent = episode.title;
+
+  Object.entries(episode).forEach(([key, value]) => {
+    if (form.elements[key]) form.elements[key].value = value;
+  });
+
+  renderBoard();
+}
+
+function readForm() {
+  const nextEpisode = { ...episodes[selectedIndex] };
+  Object.keys(nextEpisode).forEach((key) => {
+    if (form.elements[key]) nextEpisode[key] = form.elements[key].value;
+  });
+  return nextEpisode;
+}
+
+function duplicateTemplate(status = "Idea") {
+  const nextNumber = String(Math.max(...episodes.map((episode) => Number(episode.episodeNumber) || 0)) + 1).padStart(2, "0");
+  const duplicate = {
+    ...templateEpisode,
+    episodeNumber: nextNumber,
+    title: `Founder Build Log ${nextNumber}`,
+    status,
+  };
+
+  episodes = [duplicate, ...episodes];
+  selectedIndex = 0;
+  syncSelection();
+  showToast("Episode template duplicated");
+}
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add("show");
+  window.clearTimeout(showToast.timer);
+  showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 1800);
+}
+
+form.addEventListener("input", () => {
+  episodes[selectedIndex] = readForm();
+  syncSelection();
+});
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  episodes[selectedIndex] = readForm();
+  syncSelection();
+  showToast("Episode updated");
+});
+
+document.querySelector("#duplicateTemplate").addEventListener("click", () => duplicateTemplate());
+document.querySelector("#mobileDuplicate").addEventListener("click", () => duplicateTemplate());
+document.querySelector("#saveDraft").addEventListener("click", () => showToast("Draft saved locally"));
+
+syncSelection();
+
+</script>
+  </body>
+</html>
+

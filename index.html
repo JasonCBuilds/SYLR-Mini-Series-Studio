@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>S.Y.L.R. Mini-Series Studio</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Studio navigation">
+        <div class="brand-block">
+          <div class="crown" aria-hidden="true">♛</div>
+          <div class="brand-mark">S.Y.L.R.</div>
+          <div class="studio-name">Mini-Series Studio</div>
+          <div class="brand-line">Start Young Live Rich</div>
+        </div>
+        <nav class="nav-list">
+          <button class="nav-item active" type="button">
+            <span class="nav-icon" aria-hidden="true">▦</span>
+            Dashboard
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon" aria-hidden="true">▤</span>
+            Episodes
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon" aria-hidden="true">▧</span>
+            Templates
+          </button>
+          <button class="nav-item" type="button">
+            <span class="nav-icon" aria-hidden="true">▣</span>
+            Calendar
+          </button>
+        </nav>
+        <div class="founder-card">
+          <span>S.Y.L.R.</span>
+          <strong>Build the proof. Live intentional. Leave legacy.</strong>
+        </div>
+      </aside>
+
+      <main class="studio">
+        <header class="topbar">
+          <div>
+            <h1>Dashboard</h1>
+            <p>Manage short-form founder episodes from idea to post.</p>
+          </div>
+          <button class="duplicate-btn" id="duplicateTemplate" type="button">
+            <span aria-hidden="true">⧉</span>
+            Duplicate Template
+          </button>
+        </header>
+
+        <section class="mobile-summary" aria-label="Current selection">
+          <div>
+            <span id="mobileEpisode">EP. 06</span>
+            <strong id="mobileTitle">Progress Over Perfection</strong>
+          </div>
+          <button class="mini-action" id="mobileDuplicate" type="button">Duplicate</button>
+        </section>
+
+        <section class="workspace" aria-label="Episode dashboard">
+          <div class="board" id="board" aria-label="Episode status columns"></div>
+
+          <aside class="inspector" aria-label="Episode editor">
+            <div class="inspector-heading">
+              <div>
+                <span id="selectedEpisodeLabel">EP. 06</span>
+                <h2 id="selectedEpisodeTitle">Progress Over Perfection</h2>
+              </div>
+              <button class="close-button" type="button" aria-label="Close editor">×</button>
+            </div>
+
+            <form id="episodeForm" class="episode-form">
+              <div class="field-row two">
+                <label>
+                  <span>Episode Number</span>
+                  <input name="episodeNumber" type="text" />
+                </label>
+                <label>
+                  <span>Status</span>
+                  <select name="status"></select>
+                </label>
+              </div>
+
+              <label>
+                <span>Title</span>
+                <input name="title" type="text" />
+              </label>
+
+              <label>
+                <span>Hook</span>
+                <input name="hook" type="text" />
+              </label>
+
+              <label>
+                <span>Script</span>
+                <textarea name="script" rows="5"></textarea>
+              </label>
+
+              <label>
+                <span>Voiceover</span>
+                <textarea name="voiceover" rows="2"></textarea>
+              </label>
+
+              <label>
+                <span>Shot List</span>
+                <textarea name="shotList" rows="5"></textarea>
+              </label>
+
+              <label>
+                <span>Caption</span>
+                <textarea name="caption" rows="3"></textarea>
+              </label>
+
+              <label>
+                <span>Hashtags</span>
+                <input name="hashtags" type="text" />
+              </label>
+
+              <div class="field-row two">
+                <label>
+                  <span>Product Tie-In</span>
+                  <input name="productTieIn" type="text" />
+                </label>
+                <label>
+                  <span>Platform</span>
+                  <select name="platform">
+                    <option>TikTok</option>
+                    <option>Instagram</option>
+                    <option>YouTube Shorts</option>
+                    <option>LinkedIn</option>
+                  </select>
+                </label>
+              </div>
+
+              <label>
+                <span>Scheduled Post Date</span>
+                <input name="scheduledPostDate" type="datetime-local" />
+              </label>
+
+              <div class="form-actions">
+                <button class="ghost-btn" type="button" id="saveDraft">Save Draft</button>
+                <button class="primary-btn" type="submit">Update Episode</button>
+              </div>
+            </form>
+          </aside>
+        </section>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
