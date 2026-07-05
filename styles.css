@@ -565,3 +565,9 @@ textarea:focus {
     font-size: 24px;
   }
 }
+.brand-logo {
+  width: 180px;
+  max-width: 100%;
+  display: block;
+  margin-bottom: 16px;
+}
