@@ -3,50 +3,85 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>S.Y.L.R. Mini-Series Studio</title>
+    <title>Creator OS - S.Y.L.R. Mini-Series Studio</title>
+    <link rel="icon" type="image/jpeg" href="./assets/sylr-brand-icon.jpg" />
+    <link rel="apple-touch-icon" href="./assets/sylr-brand-icon.jpg" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="app-shell">
-      <aside class="sidebar" aria-label="Studio navigation">
+      <aside class="sidebar" aria-label="Creator OS navigation">
         <div class="brand-block">
-          <div class="crown" aria-hidden="true">♛</div>
-          <img class="brand-logo" src="assets/sylr-brand-icon.jpg" alt="S.Y.L.R. brand icon">
+          <img
+            class="brand-icon"
+            src="./assets/sylr-brand-icon.jpg"
+            alt="S.Y.L.R. brand icon"
+          />
+          <div class="crown" aria-hidden="true">*</div>
+          <div class="brand-mark">S.Y.L.R.</div>
           <div class="studio-name">Mini-Series Studio</div>
-          <div class="brand-line">Start Young Live Rich</div>
+          <div class="brand-line">Creator OS Workspace</div>
         </div>
         <nav class="nav-list">
-          <button class="nav-item active" type="button">
-            <span class="nav-icon" aria-hidden="true">▦</span>
+          <button class="nav-item active" type="button" data-module="dashboard">
+            <span class="nav-icon" aria-hidden="true">[]</span>
             Dashboard
           </button>
-          <button class="nav-item" type="button">
-            <span class="nav-icon" aria-hidden="true">▤</span>
+          <button class="nav-item" type="button" data-module="dailyMission">
+            <span class="nav-icon" aria-hidden="true">[]</span>
+            Daily Mission
+          </button>
+          <button class="nav-item" type="button" data-module="workspaces">
+            <span class="nav-icon" aria-hidden="true">[]</span>
+            Workspaces
+          </button>
+          <button class="nav-item" type="button" data-module="series">
+            <span class="nav-icon" aria-hidden="true">[]</span>
+            Series
+          </button>
+          <button class="nav-item" type="button" data-module="episodes">
+            <span class="nav-icon" aria-hidden="true">[]</span>
             Episodes
           </button>
-          <button class="nav-item" type="button">
-            <span class="nav-icon" aria-hidden="true">▧</span>
+          <button class="nav-item" type="button" data-module="assets">
+            <span class="nav-icon" aria-hidden="true">[]</span>
+            Assets
+          </button>
+          <button class="nav-item" type="button" data-module="calendar">
+            <span class="nav-icon" aria-hidden="true">[]</span>
+            Calendar
+          </button>
+          <button class="nav-item" type="button" data-module="templates">
+            <span class="nav-icon" aria-hidden="true">[]</span>
             Templates
           </button>
-          <button class="nav-item" type="button">
-            <span class="nav-icon" aria-hidden="true">▣</span>
-            Calendar
+          <button class="nav-item" type="button" data-module="settings">
+            <span class="nav-icon" aria-hidden="true">[]</span>
+            Settings
           </button>
         </nav>
         <div class="founder-card">
-          <span>S.Y.L.R.</span>
+          <span>Creator OS</span>
           <strong>Build the proof. Live intentional. Leave legacy.</strong>
         </div>
       </aside>
 
       <main class="studio">
         <header class="topbar">
-          <div>
-            <h1>Dashboard</h1>
-            <p>Manage short-form founder episodes from idea to post.</p>
+          <div class="dashboard-title">
+            <img
+              class="dashboard-icon"
+              src="./assets/sylr-brand-icon.jpg"
+              alt=""
+              aria-hidden="true"
+            />
+            <div>
+              <h1 id="moduleTitle">Dashboard</h1>
+              <p id="moduleSubtitle">Manage short-form founder episodes from idea to post.</p>
+            </div>
           </div>
           <button class="duplicate-btn" id="duplicateTemplate" type="button">
-            <span aria-hidden="true">⧉</span>
+            <span aria-hidden="true">+</span>
             Duplicate Template
           </button>
         </header>
@@ -59,6 +94,22 @@
           <button class="mini-action" id="mobileDuplicate" type="button">Duplicate</button>
         </section>
 
+        <section class="foundation-bar" aria-label="Workspace and series controls">
+          <label>
+            <span>Workspace</span>
+            <select id="workspaceSelect"></select>
+          </label>
+          <label>
+            <span>Series</span>
+            <select id="seriesSelect"></select>
+          </label>
+          <button class="ghost-btn" id="newWorkspace" type="button">New Workspace</button>
+          <button class="ghost-btn" id="newSeries" type="button">New Series</button>
+          <button class="primary-btn" id="newEpisode" type="button">🎬 New Episode</button>
+        </section>
+
+        <section class="module-panel" id="modulePanel" aria-live="polite"></section>
+
         <section class="workspace" aria-label="Episode dashboard">
           <div class="board" id="board" aria-label="Episode status columns"></div>
 
@@ -68,7 +119,7 @@
                 <span id="selectedEpisodeLabel">EP. 06</span>
                 <h2 id="selectedEpisodeTitle">Progress Over Perfection</h2>
               </div>
-              <button class="close-button" type="button" aria-label="Close editor">×</button>
+              <button class="close-button" type="button" aria-label="Close editor">x</button>
             </div>
 
             <form id="episodeForm" class="episode-form">
@@ -80,6 +131,22 @@
                 <label>
                   <span>Status</span>
                   <select name="status"></select>
+                </label>
+              </div>
+
+              <div class="field-row two">
+                <label>
+                  <span>Series</span>
+                  <select name="seriesId"></select>
+                </label>
+                <label>
+                  <span>Priority</span>
+                  <select name="priority">
+                    <option>Low</option>
+                    <option>Medium</option>
+                    <option>High</option>
+                    <option>Urgent</option>
+                  </select>
                 </label>
               </div>
 
@@ -134,6 +201,38 @@
                 </label>
               </div>
 
+              <div class="field-row two">
+                <label>
+                  <span>Content Type</span>
+                  <select name="contentType">
+                    <option>Short-form Video</option>
+                    <option>Carousel</option>
+                    <option>Story</option>
+                    <option>Long-form Video</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Source Type</span>
+                  <select name="sourceType">
+                    <option>Founder Original</option>
+                    <option>Customer Question</option>
+                    <option>Product Moment</option>
+                    <option>Behind the Scenes</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="field-row two">
+                <label>
+                  <span>Publish Date</span>
+                  <input name="publishDate" type="date" />
+                </label>
+                <label>
+                  <span>Publish Time</span>
+                  <input name="publishTime" type="time" />
+                </label>
+              </div>
+
               <label>
                 <span>Scheduled Post Date</span>
                 <input name="scheduledPostDate" type="datetime-local" />
@@ -149,6 +248,7 @@
       </main>
     </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <input id="importFile" type="file" accept="application/json" hidden />
     <script src="./app.js"></script>
   </body>
 </html>
